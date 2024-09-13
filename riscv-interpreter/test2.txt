@@ -1,0 +1,59 @@
+addi x1, x0, 8
+addi x2, x0, 5
+add x3, x1, x2 # adding positive numbers
+
+addi x1, x0, -21
+add x4, x2, x1 # adding positive and negative numbers
+
+sub x5, x1, x2 # subtracting positive from a negative number
+
+addi x2, x0, -11
+sub x6, x1, x2 # subtracting negative from a negative number
+
+addi x7, x0, 255
+andi x7, x7, 195 # simple and
+and x8, x1, x7
+
+addi x1, x0, -43
+sll x9, x8, x1 # shift by a negative number (-43 should be interpreted as 21)
+addi x2, x0, 4
+sll x10, x9, x2 # shift number over word boundary
+
+sra x11, x10, x1 # shift by a negative number
+sra x12, x11, x2 # shift number over word boundary
+
+slt x13, x12, x0 # negative number should be less than 0
+slt x14, x0, x12 # 0 is not less than a negative number
+slt x15, x12, x12 # a number is not less than itself
+
+addi x1, x0, -1
+beq x0, x0, 8 # branch equals
+
+add x15, x0, x1 # should not happen
+
+# BR1:
+lui x16, 0xdeadc
+addi x16, x16, 0xeef
+
+beq x16, x1, 24 # branch not equals
+
+lui x17, 0x7ffff
+addi x17, x17, 0x7ff
+add x18, x17, x17 # addition overflow
+sub x19, x17, x18 # subtraction overflow
+
+beq x0, x0, 8 # branch equals
+
+# BR2:
+add x17, x0, x0 # should not happen
+
+# BR3:
+addi x1, x0, 0xfda
+addi x2, x0, 0x1
+lui x20, 0x400
+addi x20, x20, 0xffc # form address of last addressable word (0x003ffffc)
+sw x1, 0(x20) # store into last word
+sb x2, 3(x20) # store into last byte
+
+lw x21, 0(x20) # load last word
+lb x22, 3(x20) # load last byte

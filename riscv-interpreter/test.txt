@@ -1,0 +1,41 @@
+## start[1] = 5
+## start[2] = 13
+## start[3] = 42
+## start[4] = 0x3c
+## start[5] = 0xd00
+## start[6] = 0xd0000
+## start[7] = 0xdd
+
+ADD      x10  ,   x2   ,   x3
+SUB x11, x2, x3
+AND x12, x1, x2
+SLT x13, x2, x3
+SLL x14, x3, x1
+SRA x15, x3, x1
+
+ADDI x16, x1, 37
+ADDI x17, x0, 0x3ffffcde
+ANDI x18, x2, 21
+
+LUI x19, 0xdeadc
+ADDI x19, x19, 0xeef
+
+SW x1, 0  (  x4  )
+SB x2, 3(x4)
+LW x20, 0(x4)
+LB x21, 3(x4)
+
+ADD x22, x0, x21
+SLL x22, x22, x2
+SRA x22, x22, x1
+BEQ x22, x5, -8 # taken once
+BEQ x22, x6, 12 # skip next 2
+ADDI x0, x0, 0
+ADDI x22, x0, 0
+
+ADD x0, x0, x3
+LUI x23, 0x1abe1
+ADDI x23, x23, 0x1ed
+
+SB x7, 3(x4)
+LB x24, 3(x4)
